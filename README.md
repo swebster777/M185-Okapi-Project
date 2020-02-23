@@ -1,6 +1,7 @@
 # M185-Okapi-Project
 
 regression.py:
+
   regression_line = PolynomialRegression() -- creates an object that saves the model
   
   regression_line.fit_GD(training_data.X, training_data.Y, eta=None, eps=0, tmax=10000, verbose=False) 
