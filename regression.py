@@ -55,7 +55,6 @@ class Data :
             data = np.loadtxt(fid, delimiter=",", skiprows=1,usecols=range(1, ncols-1))
         
         # separate features and labels
-        print(data.shape)
         self.X = data[0:10,0:10]
         self.y = data[:,-1]
     
@@ -203,7 +202,7 @@ class PolynomialRegression() :
                 plt.draw()
                 plt.pause(0.05) # pause for 0.05 sec
         
-        print 'number of iterations: %d' % (t+1)
+        print('number of iterations: %d' % (t+1))
         
         return self, t+1
     
@@ -347,15 +346,16 @@ class PolynomialRegression() :
 ######################################################################
 
 def main() :
+    time.time()
     # load data
-    train_data = load_data('GSE101764_filtered_methylation_data.csv')
-    # test_data = load_data('regression_test.csv')    
-    regression_line = PolynomialRegression()
-    w, v = regression_line.PCA(train_data.X)
-    print(v)
-    pca = PCA()
-    pca.fit(train_data.X)
-    print(pca.components_)
+    # train_data = load_data('GSE101764_filtered_methylation_data.csv')
+    # # test_data = load_data('regression_test.csv')    
+    # regression_line = PolynomialRegression()
+    # w, v = regression_line.PCA(train_data.X)
+    # print(v)
+    # pca = PCA()
+    # pca.fit(train_data.X)
+    # print(pca.components_)
     # ### ========== TODO : START ========== ###
     # # part a: main code for visualizations
     # print 'Visualizing data...'
