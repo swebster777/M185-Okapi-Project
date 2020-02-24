@@ -1,6 +1,6 @@
 # M185-Okapi-Project
 
-regression.py:
+regression.py (Much of this file was taken from hw from CS m146 -- The PCA analysis we built):
 
   regression_line = PolynomialRegression() -- creates an object that saves the model
   
