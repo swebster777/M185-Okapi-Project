@@ -55,8 +55,8 @@ class Data :
             data = np.loadtxt(fid, delimiter=",", skiprows=1,usecols=range(1, ncols-1))
         
         # separate features and labels
-        self.X = data[0:10,0:10]
-        self.y = data[:,-1]
+        self.X = data
+        self.y = data
     
     def plot(self, **kwargs) :
         """Plot data."""
