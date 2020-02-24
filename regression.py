@@ -52,7 +52,7 @@ class Data :
         	ncols = len(fid.readline().split(','))
 
         with open(f, 'r') as fid :
-            data = np.loadtxt(fid, delimiter=",", skiprows=1,usecols=range(1, ncols-1))
+            data = np.loadtxt(fid, delimiter=",", skiprows=1,usecols=range(1, ncols))
         
         # separate features and labels
         self.X = data
@@ -249,7 +249,7 @@ class PolynomialRegression() :
         #sort indices according to size of eigenvalue
         ind = range(0, v.shape[1])
         if w.shape[0] > 1:
-            ind = sorted(ind,key=lambda i: w[i])
+            ind = sorted(ind, reverse=True,key=lambda i: w[i])
 
         #return numpy array of eigenvectors sorted by indices
         sorted_eigenvectors = np.zeros(v.shape)
@@ -261,7 +261,7 @@ class PolynomialRegression() :
 
         for i in range(0, w.shape[0]):
             sorted_eigenvalues[i] = w[ind[i]]
-        return sorted_eigenvalues, sorted_eigenvectors
+        return sorted_eigenvalues, sorted_eigenvectors.T
 
     def predict(self, X) :
         """
@@ -348,14 +348,15 @@ class PolynomialRegression() :
 def main() :
     time.time()
     # load data
-    # train_data = load_data('GSE101764_filtered_methylation_data.csv')
-    # # test_data = load_data('regression_test.csv')    
-    # regression_line = PolynomialRegression()
-    # w, v = regression_line.PCA(train_data.X)
-    # print(v)
-    # pca = PCA()
-    # pca.fit(train_data.X)
-    # print(pca.components_)
+    train_data = load_data('../GSE101764_filtered_methylation_data.csv')
+    # test_data = load_data('regression_test.csv')    
+    regression_line = PolynomialRegression()
+    w, v = regression_line.PCA(train_data.X)
+    print(w)
+    print(v)
+    pca = PCA()
+    pca.fit(train_data.X)
+    print(pca.components_)
     # ### ========== TODO : START ========== ###
     # # part a: main code for visualizations
     # print 'Visualizing data...'
