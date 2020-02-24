@@ -6,6 +6,7 @@ Author      : Yi-Chieh Wu, Sriram Sankararaman
 
 # python libraries
 import os
+from sklearn.decomposition import PCA 
 
 # numpy libraries
 import numpy as np
@@ -45,15 +46,17 @@ class Data :
         
         # determine filename
         dir = os.path.dirname(__file__)
-        f = os.path.join(dir, '..', 'data', filename)
-        
+        f = os.path.join(dir, filename)
         # load data
         with open(f, 'r') as fid :
-            data = np.loadtxt(fid, delimiter=",")
+        	ncols = len(fid.readline().split(','))
+
+        with open(f, 'r') as fid :
+            data = np.loadtxt(fid, delimiter=",", skiprows=1,usecols=range(1, ncols-1))
         
         # separate features and labels
-        self.X = data[:,:-1]
-        self.y = data[:,-1]
+        self.X = data
+        self.y = data
     
     def plot(self, **kwargs) :
         """Plot data."""
@@ -199,7 +202,7 @@ class PolynomialRegression() :
                 plt.draw()
                 plt.pause(0.05) # pause for 0.05 sec
         
-        print 'number of iterations: %d' % (t+1)
+        print('number of iterations: %d' % (t+1))
         
         return self, t+1
     
@@ -235,18 +238,30 @@ class PolynomialRegression() :
         ### ========== TODO : END ========== ###
     
     def PCA(self, X):
+        #Centers each feature
+        for i in range(X.shape[1]):
+            mean = np.mean(X[:,i])
+            X[:,i] = X[:,i] - mean
+
         #find eigenvalues, eigenvectors
-        w, v = np.linalg.eig(np.dot(X.T, X) /float(n))
+        w, v = np.linalg.eig(np.dot(X.T, X))
 
         #sort indices according to size of eigenvalue
-        ind = range(0, v.size())
-        sorted(ind,key=lambda x,y: w[x] > w[y])
+        ind = range(0, v.shape[1])
+        if w.shape[0] > 1:
+            ind = sorted(ind,key=lambda i: w[i])
 
-        #return list of eigenvectors sorted by list of indices
-        sorted_eigs = [0 for x in range(0, v.size())]
-        sorted_eigs[i] = [v[ind[i]] for i in range(0, v.size())]
-        
-        return sorted_eigs
+        #return numpy array of eigenvectors sorted by indices
+        sorted_eigenvectors = np.zeros(v.shape)
+        sorted_eigenvectors[:,i] = v[:,ind[0]]
+
+        for i in range(0, v.shape[1]):
+            sorted_eigenvectors[:,i] = v[:,ind[i]]
+        sorted_eigenvalues = np.zeros(w.shape)
+
+        for i in range(0, w.shape[0]):
+            sorted_eigenvalues[i] = w[ind[i]]
+        return sorted_eigenvalues, sorted_eigenvectors
 
     def predict(self, X) :
         """
@@ -331,11 +346,16 @@ class PolynomialRegression() :
 ######################################################################
 
 def main() :
+    time.time()
     # load data
-    start = time.time()
-    #train_data = load_data('regression_train.csv')
-    #test_data = load_data('regression_test.csv')    
-    
+    # train_data = load_data('GSE101764_filtered_methylation_data.csv')
+    # # test_data = load_data('regression_test.csv')    
+    # regression_line = PolynomialRegression()
+    # w, v = regression_line.PCA(train_data.X)
+    # print(v)
+    # pca = PCA()
+    # pca.fit(train_data.X)
+    # print(pca.components_)
     # ### ========== TODO : START ========== ###
     # # part a: main code for visualizations
     # print 'Visualizing data...'
