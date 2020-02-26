@@ -5,13 +5,10 @@ import sklearn as sk
 def main():
     #read healthy metadata
     dir = os.path.dirname(__file__)
-    f = os.path.join(dir, '<healthy_metadata>.csv')
+    f = os.path.join(dir, 'GSE101764_metadata.csv')
 
     with open(f, 'r') as fid:
-        ncols=len(fid.readline().split('\t'))
-
-    with open(f, 'r') as fid:
-        meta_data_healthy = np.loadtxt(fid, usecols=range(1, ncols-1), skiprows=2).T
+        meta_data_healthy = np.loadtxt(fid, skiprows=2).T
 
     #add new cols (isMale, hasCancer, and doesntHaveCancer)
     meta_data_healthy = np.append(meta_data_healthy, np.logical_not(meta_data_healthy[:,1:2]), axis=1)
@@ -22,10 +19,7 @@ def main():
     f = os.path.join(dir, '<unhealthy_metadata>.csv')
 
     with open(f, 'r') as fid:
-        ncols=len(fid.readline().split('\t'))
-
-    with open(f, 'r') as fid:
-        meta_data_unhealthy = np.loadtxt(fid, usecols=range(1, ncols-1), skiprows=2).T
+        meta_data_unhealthy = np.loadtxt(fid, skiprows=2).T
 
     #add new cols(isMale, hasCancer, and doesntHaveCancer)
     meta_data_unhealthy = np.append(meta_data_unhealthy, np.logical_not(meta_data_unhealthy[:,1:2]), axis=1)
