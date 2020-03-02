@@ -20,10 +20,12 @@ def main():
 	for i in range(np.size(methylation_data[:,0])):
             y_true = methylation_data[i,].T
             reg = LinearRegression().fit(meta_data, y_true)
-            coefficient_matrix.append(list(reg.coef_))
+            intercept_and_coef = list(reg.coef_)
+            intercept_and_coef.insert(0, float(reg.intercept_))
+            coefficient_matrix.append(intercept_and_coef)
             print i
 
-	with open("coefficients.csv", "wb") as f:
+	with open("intercept_and_coefficients.csv", "wb") as f:
 		writer = csv.writer(f)
 		writer.writerows(coefficient_matrix)
 
