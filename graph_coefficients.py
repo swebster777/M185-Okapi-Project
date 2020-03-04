@@ -30,9 +30,7 @@ def main():
     	intercept_and_coef = list(reg.coef_)
     	intercept_and_coef.insert(0, reg.intercept_)
     	coefficient_matrix.append(intercept_and_coef)
-
-    	if i > 998:
-    		break
+    	
     	if i % 10000 == 0:
     		print(i)
 
