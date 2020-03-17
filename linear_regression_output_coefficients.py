@@ -22,34 +22,23 @@ def load_csv(filename):
 
 # In[3]:
 
-
-#import methylation
-#import meta data
+#import training methylation and meta data
 meta_data = np.array(load_csv('meta_data_no_labels_6var.csv'), dtype=np.float64)[20:-20, :]
-#transpose meta data
 methylation_data = np.array(load_csv('methylation_data_no_labels.csv'), dtype=np.float64)[:, 20:-20]
-
-
-# In[8]:
-
-
-print meta_data[:20]
-print methylation_data[:20]
 
 
 # In[4]:
 
-
 coefficient_matrix = []
     
 for i in range(np.size(methylation_data[:,0])):
-    y_true = methylation_data[i,].T
+    y_true = methylation_data[i,].T #transpose
     reg = Ridge()
     reg = reg.fit(meta_data, y_true)
     intercept_and_coef = list(reg.coef_)
     intercept_and_coef.insert(0, float(reg.intercept_))
     coefficient_matrix.append(intercept_and_coef)
-    if i%100000 == 0:
+    if i%100000 == 0: #progress report
         print i
 
 
