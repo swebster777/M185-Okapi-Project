@@ -34,7 +34,7 @@ print "Finished loading chromosomes!"
 # In[4]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -50,7 +50,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[0], s=5, marker='o', alpha=0.2, c=col
 # In[12]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -66,7 +66,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[1], s=5, marker='o', alpha=0.2, c=col
 # In[13]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -82,7 +82,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[2], s=5, marker='o', alpha=0.2, c=col
 # In[14]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -98,7 +98,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[3], s=5, marker='o', alpha=0.2, c=col
 # In[15]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -114,7 +114,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[4], s=5, marker='o', alpha=0.2, c=col
 # In[16]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -130,7 +130,7 @@ plt.scatter(range(coeffs.shape[1]), coeffs[5], s=5, marker='o', alpha=0.2, c=col
 # In[17]:
 
 
-col = np.where(chromosomes%2==0, 'darkblue', 'black')
+col = np.where(chromosomes%2==0, 'darkblue', 'black') #seperate chromosomes by color
 col = np.squeeze(col)
 plt.figure(figsize=(20,10))
 plt.margins(0,0)
@@ -198,10 +198,4 @@ print "Proportion of sites where cancer alone was significant but sex and cancer
 print (num_flags_cancer - (num_flags_female_no_cancer + num_flags_female_cancer + num_flags_male_no_cancer + num_flags_male_cancer))/float(abs_coeffs.shape[1])
 print "Proportion of sites where sex and cancer status was significant but cancer alone was not:"
 print (1 - num_flags_sig_both/float(num_flags_female_no_cancer + num_flags_female_cancer + num_flags_male_no_cancer + num_flags_male_cancer))
-
-
-# In[ ]:
-
-
-
 
